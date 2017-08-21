@@ -5,7 +5,7 @@ const ejs = require('ejs');
 const app = express();
 
 // 设置静态资源目录
-app.use(express.static('public'));
+app.use('/static', express.static('static'));
 
 // 设置模板
 app.set('views', path.join(__dirname, 'views')); // 放模板文件的目录
