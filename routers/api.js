@@ -750,23 +750,8 @@ koaRouter.post('/api/createArticle', async function (ctx) {
     /**************************** 拿到 post 数据 ******************************/
 
     const reqBody = ctx.request.body;
-    const article = {
-        title: reqBody.title,
-        intro: reqBody.intro,
-        content: reqBody.content,
-        type: reqBody.type,
-        tag: reqBody.tag,
-        read_count: reqBody.read_count,
-        likes: reqBody.likes,
-        donates: reqBody.donates,
-        author_id: reqBody.author_id,
-        author_name: reqBody.author_name,
-        author_avatar: reqBody.author_avatar,
-        created_at: reqBody.created_at,
-        updated_at: reqBody.updated_at,
-        comments: reqBody.comments,
-    };
-    // console.debug('article', article);
+    const article = Object.assign(reqBody);
+    // console.debug('article', article, 'ctx.request.body', ctx.request.body);
 
     let errno = 0;  // 错误码
     let errmsg = '';    // 错误提示
@@ -798,8 +783,8 @@ koaRouter.post('/api/createArticle', async function (ctx) {
     try {
         // 库中插入新数据
         data = await mysqlUtil.query(
-            `INSERT INTO articles (id,title,intro,content,type,tag,author_id,author_name,author_avatar) 
-             VALUES ('${article.id}','${article.title}','${article.intro}','${article.content}','${article.type}','${article.tag}','${article.author_id}','${article.author_name}','${article.author_avatar}');`
+            `INSERT INTO articles (id,title,intro,content,type,type2,author_id,author_name,author_avatar) 
+             VALUES ('${article.id}','${article.title}','${article.intro}','${article.content}','${article.type}','${article.type2}','${article.author_id}','${article.author_name}','${article.author_avatar}');`
         );
         // 返回数据
         ctx.body = getCtxBody(errno, errmsg, data);

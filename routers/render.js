@@ -12,7 +12,7 @@ const constant = require('../utils/constant');  // 常量
  * 初始化变量
  */
 
-let currentHost = 'http://localhost:3000';
+let currentHost = 'http://localhost:5000';
 
 // 是否是生产环境
 const isProduction = process.env.NODE_ENV === 'production';
