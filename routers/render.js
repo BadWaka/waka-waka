@@ -17,7 +17,6 @@ const currentHost = 'http://localhost:5000';
  * 主页
  */
 koaRouter.get('/', async function (ctx) {
-    console.debug('aaa');
     // // 得到 cookie
     // const cookie = ctx.cookies.get(constant.cookieName);
     // console.debug('cookie', cookie);
