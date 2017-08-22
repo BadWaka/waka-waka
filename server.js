@@ -8,6 +8,9 @@ const koaMount = require('koa-mount'); // koa-mount 将中间件挂载到特定u
 const koaEjs = require('koa-ejs');
 const koaBodyParser = require('koa-bodyparser'); // koa-bodyparser 解析post中的data
 
+const renderRouter = require('./routers/render'); // 渲染路由
+const apiRouter = require('./routers/api'); // 接口路由
+
 /************************ initial ************************/
 
 const app = new Koa();
@@ -33,9 +36,15 @@ koaEjs(app, {
 // 解析post的data
 app.use(koaBodyParser());
 
-// app.use(async (ctx, next) => {
-//     ctx.body = 'Hello World';
-// });
+/************************ 路由 ************************/
+
+// 渲染路由，用来渲染页面
+app.use(renderRouter.routes());
+app.use(renderRouter.allowedMethods());
+
+// 接口路由，用来做逻辑处理
+app.use(apiRouter.routes());
+app.use(apiRouter.allowedMethods());
 
 /************************ start server ************************/
 
