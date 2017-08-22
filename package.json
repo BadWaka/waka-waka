@@ -19,6 +19,12 @@
   "homepage": "https://github.com/BadWaka/waka-waka#readme",
   "dependencies": {
     "ejs": "^2.5.7",
-    "express": "^4.15.4"
+    "express": "^4.15.4",
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-ejs": "^4.1.0",
+    "koa-mount": "^3.0.0",
+    "koa-static": "^4.0.1",
+    "tracer": "^0.8.9"
   }
 }
