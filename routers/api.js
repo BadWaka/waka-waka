@@ -12,7 +12,7 @@ const fileUtil = require('../utils/fileUtil');  // 自己封的文件工具
 const moment = require('moment');   // moment.js 处理时间日期格式
 const lodash = require('lodash');   // 工具库
 const path = require('path');   // node path
-// const mysqlUtil = require('../utils/mysqlUtil');    // 操作数据库工具集
+const mysqlUtil = require('../utils/mysqlUtil');    // 操作数据库工具集
 
 // initial
 

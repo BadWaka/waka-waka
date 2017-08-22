@@ -11,26 +11,34 @@ const constant = require('../utils/constant');  // 常量
 /**
  * 初始化变量
  */
-const currentHost = 'http://localhost:5000';
+
+let currentHost = 'http://localhost:3000';
+
+// 是否是生产环境
+const isProduction = process.env.NODE_ENV === 'production';
+console.debug('当前环境 process.env.NODE_ENV', process.env.NODE_ENV);
+if (!isProduction) {
+    currentHost = 'http://localhost:3000';
+}
 
 /**
  * 主页
  */
 koaRouter.get('/', async function (ctx) {
-    // // 得到 cookie
-    // const cookie = ctx.cookies.get(constant.cookieName);
-    // console.debug('cookie', cookie);
-    // // 请求所有文章数据
-    // const p1 = requestPromise(currentHost + '/api/getArticle');
-    // try {
-    //     const values = await Promise.all([p1]);
-    //     // console.debug('values', values);
-    //     await ctx.render('index', {
-    //         articles: JSON.parse(values[0])
-    //     });
-    // } catch (err) {
-    //     console.error(err);
-    // }
+    // 得到 cookie
+    const cookie = ctx.cookies.get(constant.cookieName);
+    console.debug('cookie', cookie);
+    // 请求所有文章数据
+    const p1 = requestPromise(`${currentHost}/api/getArticle`);
+    try {
+        const values = await Promise.all([p1]);
+        // console.debug('values', values);
+        await ctx.render('index', {
+            articles: JSON.parse(values[0])
+        });
+    } catch (err) {
+        console.error(err);
+    }
     await ctx.render('index', {});
 });
 
