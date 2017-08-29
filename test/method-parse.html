@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>method-parse</title>
+</head>
+<body>
+<script>
+    var object = {
+        b: {
+            c: 4
+        },
+        d: [{
+            e: 5
+        }, {
+            e: 6
+        }]
+    };
+
+    function parse(obj, param) {
+        let p = param.replace(/\.|\[|\]/g, '.').trim().replace(/\.{2,}/g, '.').split('.');
+        let d = obj;
+        while (p.length && d) {
+            d = d[p.shift()];
+        }
+        return d;
+    }
+
+    parse(object, 'd[0].e');
+
+</script>
+</body>
+</html>
