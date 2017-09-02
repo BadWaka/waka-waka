@@ -29,6 +29,10 @@
     <div v-html="rawHtml"></div>
 
     <form v-on:submit.prevent="onSubmit"></form>
+
+    <p>Original message: "{{ message }}"</p>
+    <p>Computed reversed message: "{{ reversedMessage }}"</p>
+
 </div>
 <script src="../static/scripts/vue.js"></script>
 <script>
@@ -56,21 +60,32 @@
             ],
             rawHtml: '<div>abcd</div>'
         },
+        // 创建
         created: function () {
             console.log('created a', this.a);
         },
+        // 加载
         mounted: function () {
             console.log('mounted');
         },
+        // 更新
         updated: function () {
             console.log('updated');
         },
+        // 销毁
         destroyed: function () {
             console.log('destroyed');
         },
+        // 方法
         methods: {
             m1: function () {
                 this.message += ' 1';
+            }
+        },
+        // 计算属性
+        computed: {
+            reversedMessage: function () {
+                return this.message.split('').reverse().join('');
             }
         }
     });
