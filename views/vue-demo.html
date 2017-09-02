@@ -24,9 +24,11 @@
         </todo-item>
     </ol>
 
-    <p v-once>{{message}}</p>
+    <p v-once>{{message.split('').reverse().join('')}}</p>
 
     <div v-html="rawHtml"></div>
+
+    <form v-on:submit.prevent="onSubmit"></form>
 </div>
 <script src="../static/scripts/vue.js"></script>
 <script>
