@@ -5,16 +5,73 @@
     <title>vue-demo</title>
 </head>
 <body>
-<div id="app">
+<div id="app" v-if="seen" v-bind:title="message">
     {{ message }}
+    <ul>
+        <li v-for="todo in todos">
+            {{todo.text}}
+        </li>
+    </ul>
+    <button v-on:click="m1">增加字符串</button>
+
+    <input type="text" v-model="message">
+
+    <ol>
+        <todo-item
+                v-for="item in groceryList"
+                v-bind:todo="item"
+                v-bind:key="item.id">
+        </todo-item>
+    </ol>
+
+    <p v-once>{{message}}</p>
 </div>
-<script src="https://unpkg.com/vue"></script>
+<script src="../static/scripts/vue.js"></script>
 <script>
+
+    Vue.component('todo-item', {
+        props: ['todo'],    // 属性名是 todo
+        template: '<li>{{todo.text}}</li>'
+    });
+
     const app = new Vue({
         el: '#app',
         data: {
-            message: 'Hello Vue!'
+            a: 0,
+            message: 'Hello Vue!',
+            seen: true,
+            todos: [
+                {text: '学习 JavaScript'},
+                {text: '学习 Vue'},
+                {text: '整个牛项目'}
+            ],
+            groceryList: [
+                {id: 0, text: '蔬菜'},
+                {id: 1, text: '奶酪'},
+                {id: 2, text: '随便其他什么人吃的东西'}
+            ],
+        },
+        created: function () {
+            console.log('created a', this.a);
+        },
+        mounted: function () {
+            console.log('mounted');
+        },
+        updated: function () {
+            console.log('updated');
+        },
+        destroyed: function () {
+            console.log('destroyed');
+        },
+        methods: {
+            m1: function () {
+                this.message += ' 1';
+            }
         }
+    });
+
+    app.$watch('a', function (newValue, oldValue) {
+        console.log('newValue', newValue, 'oldValue', oldValue);
     });
 </script>
 </body>
