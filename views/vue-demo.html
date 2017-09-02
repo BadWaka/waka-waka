@@ -25,6 +25,8 @@
     </ol>
 
     <p v-once>{{message}}</p>
+
+    <div v-html="rawHtml"></div>
 </div>
 <script src="../static/scripts/vue.js"></script>
 <script>
@@ -50,6 +52,7 @@
                 {id: 1, text: '奶酪'},
                 {id: 2, text: '随便其他什么人吃的东西'}
             ],
+            rawHtml: '<div>abcd</div>'
         },
         created: function () {
             console.log('created a', this.a);
