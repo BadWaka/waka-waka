@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数节流 throttle</title>
+</head>
+<body>
+<script>
+    window.addEventListener('resize', function () {
+        console.log('resize');
+    });
+
+    /**
+     * 函数节流函数
+     * @param method
+     * @param context
+     */
+    function throttle(method, context) {
+        clearTimeout(method.tId);
+        method.tId = setTimeout(function () {
+
+        }, 100);
+    }
+</script>
+</body>
+</html>
