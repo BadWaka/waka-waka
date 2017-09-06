@@ -751,7 +751,7 @@ koaRouter.post('/api/createArticle', async function (ctx) {
 
     const reqBody = ctx.request.body;
     const article = Object.assign(reqBody);
-    // console.debug('article', article, 'ctx.request.body', ctx.request.body);
+    console.debug('创建新文章 article', article, 'ctx.request.body', ctx.request.body);
 
     let errno = 0;  // 错误码
     let errmsg = '';    // 错误提示
