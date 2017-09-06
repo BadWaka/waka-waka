@@ -783,8 +783,8 @@ koaRouter.post('/api/createArticle', async function (ctx) {
     try {
         // 库中插入新数据
         data = await mysqlUtil.query(
-            `INSERT INTO articles (id,title,intro,content,type,type2,author_id,author_name,author_avatar) 
-             VALUES ('${article.id}','${article.title}','${article.intro}','${article.content}','${article.type}','${article.type2}','${article.author_id}','${article.author_name}','${article.author_avatar}');`
+            `INSERT INTO articles (id,title,intro,content,type,tag,author_id,author_name,author_avatar) 
+             VALUES ('${article.id}','${article.title}','${article.intro}','${article.content}','${article.type}','${article.tag}','${article.author_id}','${article.author_name}','${article.author_avatar}');`
         );
         // 返回数据
         ctx.body = getCtxBody(errno, errmsg, data);
