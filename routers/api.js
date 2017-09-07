@@ -751,7 +751,7 @@ koaRouter.post('/api/createArticle', async function (ctx) {
 
     const reqBody = ctx.request.body;
     const article = Object.assign(reqBody);
-    console.debug('创建新文章 article', article, 'ctx.request.body', ctx.request.body);
+    console.debug('创建新文章 /api/createArticle', article, 'ctx.request.body', ctx.request.body);
 
     let errno = 0;  // 错误码
     let errmsg = '';    // 错误提示
@@ -780,11 +780,18 @@ koaRouter.post('/api/createArticle', async function (ctx) {
     // 生成 uuid
     article.id = uuidV4().replace(/-/g, '');    // 去掉中间的 - 号，因为这样会导致 mysql 报错
 
+    // 生成一些默认值
+    article.read_count = 0;
+    article.like_count = 0;
+    article.donate_count = 0;
+    article.created_at = new Date().getTime();
+    article.updated_at = article.created_at;
+
     try {
         // 库中插入新数据
         data = await mysqlUtil.query(
-            `INSERT INTO articles (id,title,intro,content,type,tag,author_id,author_name,author_avatar) 
-             VALUES ('${article.id}','${article.title}','${article.intro}','${article.content}','${article.type}','${article.tag}','${article.author_id}','${article.author_name}','${article.author_avatar}');`
+            `INSERT INTO articles (id,title,intro,content,type,tag,author_id,author_name,author_avatar,read_count,like_count,donate_count,created_at,updated_at) 
+             VALUES ('${article.id}','${article.title}','${article.intro}','${article.content}','${article.type}','${article.tag}','${article.author_id}','${article.author_name}','${article.author_avatar}','${article.read_count}','${article.like_count}','${article.donate_count}','${article.created_at}','${article.updated_at}');`
         );
         // 返回数据
         ctx.body = getCtxBody(errno, errmsg, data);
