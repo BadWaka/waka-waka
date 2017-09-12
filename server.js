@@ -7,6 +7,7 @@ const koaStatic = require('koa-static'); // koa-static   设置静态资源目�
 const koaMount = require('koa-mount'); // koa-mount 将中间件挂载到特定url下
 const koaEjs = require('koa-ejs');
 const koaBodyParser = require('koa-bodyparser'); // koa-bodyparser 解析post中的data
+const koaCors = require('koa-cors');    // 设置 CORS 跨域
 
 const renderRouter = require('./routers/render'); // 渲染路由
 const apiRouter = require('./routers/api'); // 接口路由
@@ -20,6 +21,11 @@ const isProduction = process.env.NODE_ENV === 'production';
 console.debug('当前环境 process.env.NODE_ENV', process.env.NODE_ENV);
 
 /************************ middleware ************************/
+
+// 设置 CORS
+app.use(koaCors({
+    origin: 'localhost:8080'
+}));
 
 // 设置静态目录，使用 koa-mount 和 koa-static 将静态资源目录挂载到 /static 路径下
 app.use(koaMount('/static', koaStatic('static')));
